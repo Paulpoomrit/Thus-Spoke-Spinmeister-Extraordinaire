@@ -32,6 +32,16 @@ void APaperCharBase::Move(const FInputActionValue& InputValue)
 	AddMovementInput(FVector(0,1,0), DirectionalValue2d.Y);
 }
 
+void APaperCharBase::StartJump(const FInputActionValue& InputValue)
+{
+	Jump();
+}
+
+void APaperCharBase::StopJump(const FInputActionValue& InputValue)
+{
+	StopJumping();
+}
+
 
 void APaperCharBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -41,5 +51,7 @@ void APaperCharBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APaperCharBase::Move);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &APaperCharBase::StartJump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &APaperCharBase::StopJump);
 	}
 }

@@ -19,6 +19,8 @@ protected:
 
 	// called for movement input
 	void Move(const FInputActionValue& InputValue);
+	void StartJump(const FInputActionValue& InputValue);
+	void StopJump(const FInputActionValue& InputValue);
 
 	// Mapping Context for Player Input
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Input")
@@ -26,6 +28,9 @@ protected:
 
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Input")
 	const UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Input")
+	const UInputAction* JumpAction;
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 };
