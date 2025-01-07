@@ -2,6 +2,7 @@
 
 
 #include "BaseRetroWeapon.h"
+#include "Engine/World.h"
 
 // Sets default values
 ABaseRetroWeapon::ABaseRetroWeapon()
@@ -29,7 +30,13 @@ void ABaseRetroWeapon::FireWeapon()
 {
 	const FVector Start = GetActorLocation();
 	const FVector End = Start + GetActorForwardVector() * MaxShootDistance;
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, true);
-	DrawDebugSphere(GetWorld(), End, 10, 10 , FColor::Blue, true);
+
+	FHitResult Hit;
+	FCollisionQueryParams CollisionParams; // define the collision
+	CollisionParams.AddIgnoredActor(GetWorld()->GetFirstPlayerController()->GetPawn());
+	
+	GetWorld()->LineTraceSingleByChannel(Hit, Start , End, ECC_Visibility,CollisionParams);
+	DrawDebugLine(GetWorld(), Start, End, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
+	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 }
 

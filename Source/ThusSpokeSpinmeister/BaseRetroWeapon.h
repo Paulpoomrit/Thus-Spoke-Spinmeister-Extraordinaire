@@ -24,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
-	int MaxShootDistance = 400;
+	int MaxShootDistance = 1000;
 
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	void FireWeapon();
