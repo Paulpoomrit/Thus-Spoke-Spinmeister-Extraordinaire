@@ -25,3 +25,11 @@ void ABaseRetroWeapon::Tick(float DeltaTime)
 
 }
 
+void ABaseRetroWeapon::FireWeapon()
+{
+	const FVector Start = GetActorLocation();
+	const FVector End = Start + GetActorForwardVector() * MaxShootDistance;
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, true);
+	DrawDebugSphere(GetWorld(), End, 10, 10 , FColor::Blue, true);
+}
+

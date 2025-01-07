@@ -23,4 +23,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
+	int MaxShootDistance = 400;
+
+	UFUNCTION(BlueprintCallable, Category="Gameplay")
+	void FireWeapon();
 };
