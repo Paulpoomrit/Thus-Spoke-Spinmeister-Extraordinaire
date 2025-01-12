@@ -6,6 +6,15 @@
 #include "GameFramework/Actor.h"
 #include "BaseRetroWeapon.generated.h"
 
+UENUM(BlueprintType)
+enum class EAmmoType : uint8
+{
+	Bullet = 0b0000 UMETA(DisplayName = "Bullet"),
+	Shell = 0b0001 UMETA(DisplayName = "Shell"),
+	Rocket = 0b0010 UMETA(DisplayName = "Rocket"),
+	Cell = 0b0011 UMETA(DisplayName = "Cell"),
+};
+
 UCLASS()
 class THUSSPOKESPINMEISTER_API ABaseRetroWeapon : public AActor
 {
@@ -19,6 +28,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+    EAmmoType AmmoType = EAmmoType::Bullet;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -28,4 +40,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	void FireWeapon();
+
+	UFUNCTION(BlueprintCallable, Category="Gameplay")
+	bool HasEnoughAmmo();
 };

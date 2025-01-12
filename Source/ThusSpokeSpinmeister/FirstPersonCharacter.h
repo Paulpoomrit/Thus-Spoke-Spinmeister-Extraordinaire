@@ -26,4 +26,27 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int CurrentBullet;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int CurrentShell;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int CurrentRocket;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int CurrentCell;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int MaxBullet = 200;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int MaxShell = 50;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int MaxRocket = 50;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
+	int MaxCell = 300;
 };
