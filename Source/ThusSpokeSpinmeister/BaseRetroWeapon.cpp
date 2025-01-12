@@ -40,6 +40,8 @@ void ABaseRetroWeapon::FireWeapon()
 	GetWorld()->LineTraceSingleByChannel(Hit, Start , End, ECC_Visibility,CollisionParams);
 	DrawDebugLine(GetWorld(), Start, End, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
+
+	DecrementAmmo();
 }
 
 bool ABaseRetroWeapon::HasEnoughAmmo()
@@ -75,5 +77,21 @@ bool ABaseRetroWeapon::HasEnoughAmmo()
 	}
 	
 	return true;
+}
+
+void ABaseRetroWeapon::DecrementAmmo()
+{
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	switch (AmmoType)
+	{
+		case EAmmoType::Bullet:
+			Player->CurrentBullet--;
+		case EAmmoType::Shell:
+			Player->CurrentShell--;
+		case EAmmoType::Rocket:
+			Player->CurrentRocket--;
+		case EAmmoType::Cell:
+			Player->CurrentCell--;
+	}
 }
 

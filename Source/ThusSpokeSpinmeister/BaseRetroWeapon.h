@@ -43,4 +43,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	bool HasEnoughAmmo();
+
+	void DecrementAmmo();
 };
