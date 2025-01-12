@@ -30,6 +30,7 @@ void ABaseRetroWeapon::Tick(float DeltaTime)
 
 void ABaseRetroWeapon::FireWeapon()
 {
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	const FVector Start = GetActorLocation();
 	const FVector End = Start + GetActorForwardVector() * MaxShootDistance;
 
