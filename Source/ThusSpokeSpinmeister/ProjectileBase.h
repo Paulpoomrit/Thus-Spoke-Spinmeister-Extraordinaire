@@ -28,4 +28,7 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Projectile Properties")
 	float ProjectileDamage = 0;
+
+	void SetProjectileSpeed(float value);
+	void SetProjectileDamage(float value);
 };

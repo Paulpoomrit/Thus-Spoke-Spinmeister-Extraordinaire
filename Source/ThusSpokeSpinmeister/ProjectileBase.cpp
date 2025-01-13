@@ -25,3 +25,13 @@ void AProjectileBase::Tick(float DeltaTime)
 
 }
 
+void AProjectileBase::SetProjectileSpeed(float value)
+{
+	this->ProjectileSpeed = value;
+}
+
+void AProjectileBase::SetProjectileDamage(float value)
+{
+	this->ProjectileDamage = value;
+}
+

@@ -48,6 +48,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	bool HasEnoughAmmo();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
+	float ProjectileSpeed = 4000;
+
 	void DecrementAmmo();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")

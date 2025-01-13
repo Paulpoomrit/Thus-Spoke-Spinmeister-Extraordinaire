@@ -100,8 +100,10 @@ void ABaseRetroWeapon::FireProjectile()
 {
 	if (Projectile)
 	{
-		FActorSpawnParameters SpawnParameters;
-		AProjectileBase* ProjectileRef = GetWorld()->SpawnActor<AProjectileBase>(Projectile, GetTransform());
+		AProjectileBase* ProjectileRef = GetWorld()->SpawnActorDeferred<AProjectileBase>(Projectile, GetTransform());
+		ProjectileRef->SetProjectileSpeed(this->ProjectileSpeed);
+		ProjectileRef->SetProjectileDamage(this->WeaponDamage);
+		ProjectileRef->FinishSpawning(GetTransform());
 	}
 }
 
