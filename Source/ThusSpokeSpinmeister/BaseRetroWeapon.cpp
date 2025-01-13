@@ -28,7 +28,7 @@ void ABaseRetroWeapon::Tick(float DeltaTime)
 
 }
 
-void ABaseRetroWeapon::FireWeapon()
+void ABaseRetroWeapon::FireWeapon(int AmountOfAmmoNeeded)
 {
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	const FVector Start = GetActorLocation();
@@ -42,7 +42,7 @@ void ABaseRetroWeapon::FireWeapon()
 	DrawDebugLine(GetWorld(), Start, End, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 
-	DecrementAmmo();
+	DecrementAmmo(AmountOfAmmoNeeded);
 }
 
 bool ABaseRetroWeapon::HasEnoughAmmo()
@@ -80,19 +80,19 @@ bool ABaseRetroWeapon::HasEnoughAmmo()
 	return true;
 }
 
-void ABaseRetroWeapon::DecrementAmmo()
+void ABaseRetroWeapon::DecrementAmmo(int AmountOfAmmoNeeded)
 {
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	switch (AmmoType)
 	{
 		case EAmmoType::Bullet:
-			Player->CurrentBullet--;
+			Player->CurrentBullet-= AmountOfAmmoNeeded;
 		case EAmmoType::Shell:
-			Player->CurrentShell--;
+			Player->CurrentShell-= AmountOfAmmoNeeded;
 		case EAmmoType::Rocket:
-			Player->CurrentRocket--;
+			Player->CurrentRocket-= AmountOfAmmoNeeded;
 		case EAmmoType::Cell:
-			Player->CurrentCell--;
+			Player->CurrentCell-= AmountOfAmmoNeeded;
 	}
 }
 

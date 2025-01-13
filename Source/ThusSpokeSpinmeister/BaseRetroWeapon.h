@@ -43,7 +43,7 @@ public:
 	int WeaponDamage = 1;
 
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
-	void FireWeapon();
+	void FireWeapon(int AmountOfAmmoNeeded);
 
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	bool HasEnoughAmmo();
@@ -51,7 +51,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
 	float ProjectileSpeed = 4000;
 
-	void DecrementAmmo();
+	void DecrementAmmo(int AmountOfAmmoNeeded);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
 	TSubclassOf<class AProjectileBase> Projectile; 
