@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ProjectileBase.h"
 #include "GameFramework/Actor.h"
 #include "BaseRetroWeapon.generated.h"
 
@@ -48,4 +49,10 @@ public:
 	bool HasEnoughAmmo();
 
 	void DecrementAmmo();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
+	TSubclassOf<class AProjectileBase> Projectile; 
+	
+	UFUNCTION(BlueprintCallable, Category="Gameplay")
+	void FireProjectile();
 };

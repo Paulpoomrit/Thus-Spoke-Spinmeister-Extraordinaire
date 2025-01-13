@@ -96,3 +96,12 @@ void ABaseRetroWeapon::DecrementAmmo()
 	}
 }
 
+void ABaseRetroWeapon::FireProjectile()
+{
+	if (Projectile)
+	{
+		FActorSpawnParameters SpawnParameters;
+		AProjectileBase* ProjectileRef = GetWorld()->SpawnActor<AProjectileBase>(Projectile, GetTransform());
+	}
+}
+
