@@ -40,7 +40,7 @@ public:
 	int MaxShootDistance = 1000;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
-	int WeaponDamage = 1;
+	float WeaponDamage = 1;
 
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	void FireWeapon(int AmountOfAmmoNeeded);
