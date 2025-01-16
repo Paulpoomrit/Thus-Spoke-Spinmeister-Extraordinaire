@@ -6,6 +6,19 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+UENUM(BlueprintType)
+enum class EWeaponType : uint8
+{
+	Pistol = 0b0000 UMETA(DisplayName = "Pistol"),
+	MiniGun = 0b0001 UMETA(DisplayName = "MiniGun"),
+	PlasmaRifle = 0b0010 UMETA(DisplayName = "PlasmaRifle"),
+	RPG = 0b0011 UMETA(DisplayName = "RPG"),
+	BFG = 0b1000 UMETA(DisplayName = "BFG"),
+	Chainsaw = 0b1001 UMETA(DisplayName = "Chainsaw"),
+	Fist = 0b1010 UMETA(DisplayName = "Fist"),
+};
+
+
 UCLASS()
 class THUSSPOKESPINMEISTER_API AFirstPersonCharacter : public ACharacter
 {
