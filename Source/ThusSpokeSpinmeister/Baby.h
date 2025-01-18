@@ -26,4 +26,13 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
+	int MaxMeleeAttackDistance = 150;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
+	float BabyDamage = 1;
+	
+	UFUNCTION(BlueprintCallable)
+    void MeleeAttack();
+
 };

@@ -3,6 +3,9 @@
 
 #include "Baby.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "FirstPersonCharacter.h"
+
 // Sets default values
 ABaby::ABaby()
 {
@@ -30,5 +33,26 @@ void ABaby::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABaby::MeleeAttack()
+{
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	const FVector Start = GetActorLocation();
+	const FVector End = Start + GetActorForwardVector() * MaxMeleeAttackDistance;
+	TSubclassOf <UDamageType> MeleeAttack;
+
+	FHitResult Hit;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+
+	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, CollisionParams);
+	DrawDebugLine(GetWorld(), Start, End, Hit.bBlockingHit ? FColor::Red : FColor::Blue, false, 5);
+	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, false, 5);
+
+	if (Hit.GetActor() == Player)
+	{
+		UGameplayStatics::ApplyDamage(Player, BabyDamage, this->GetController(), this, MeleeAttack);
+	}
 }
 
