@@ -54,7 +54,10 @@ public:
 	void DecrementAmmo(int AmountOfAmmoNeeded);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
-	TSubclassOf<class AProjectileBase> Projectile; 
+	TSubclassOf<class AProjectileBase> Projectile;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
+	TSubclassOf<class ABlood> Blood;
 	
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	void FireProjectile();

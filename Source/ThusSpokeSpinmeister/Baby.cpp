@@ -66,6 +66,7 @@ bool ABaby::BeingDamaged(float Damage)
 	if (BabyHealth <= 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Baby is dead"));
+		IsDead = true;
 	}
 	return IsDead;
 }

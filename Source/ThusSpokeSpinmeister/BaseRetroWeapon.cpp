@@ -3,6 +3,8 @@
 
 #include "BaseRetroWeapon.h"
 
+#include "Baby.h"
+#include "Blood.h"
 #include "FirstPersonCharacter.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
@@ -43,14 +45,21 @@ void ABaseRetroWeapon::FireWeapon(int AmountOfAmmoNeeded)
 	GetWorld()->LineTraceSingleByChannel(Hit, Start , End, ECC_Visibility,CollisionParams);
 	DrawDebugLine(GetWorld(), Start, End, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
+	DecrementAmmo(AmountOfAmmoNeeded);
 	
 	if (Hit.bBlockingHit)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
-		UGameplayStatics::ApplyDamage(Hit.GetActor(), WeaponDamage, GetWorld()->GetFirstPlayerController(), this, WeaponAttack);
+		if (Hit.GetActor()->ActorHasTag(FName("Baby")))
+		{
+			UGameplayStatics::ApplyDamage(Hit.GetActor(), WeaponDamage, GetWorld()->GetFirstPlayerController(), this, WeaponAttack);
+			// Spawn Blood
+			GetWorld()->SpawnActor<ABlood>(Blood, Hit.Location, Hit.GetActor()->GetActorRotation() + FRotator(0, 90, 0));
+		}
 	}
 	
-	DecrementAmmo(AmountOfAmmoNeeded);
+	
+	
 }
 
 bool ABaseRetroWeapon::HasEnoughAmmo()
