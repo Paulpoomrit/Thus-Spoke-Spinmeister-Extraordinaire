@@ -52,7 +52,21 @@ void ABaby::MeleeAttack()
 
 	if (Hit.GetActor() == Player)
 	{
-		UGameplayStatics::ApplyDamage(Player, BabyDamage, this->GetController(), this, MeleeAttack);
+		UGameplayStatics::ApplyDamage(Player,
+										BabyDamage,
+										this->GetController(),
+										this,
+										MeleeAttack);
 	}
+}
+
+bool ABaby::BeingDamaged(float Damage)
+{
+	BabyHealth = BabyHealth - Damage;
+	if (BabyHealth <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Baby is dead"));
+	}
+	return IsDead;
 }
 

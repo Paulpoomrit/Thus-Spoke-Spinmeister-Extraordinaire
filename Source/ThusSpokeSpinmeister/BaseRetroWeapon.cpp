@@ -5,6 +5,7 @@
 
 #include "FirstPersonCharacter.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABaseRetroWeapon::ABaseRetroWeapon()
@@ -37,11 +38,18 @@ void ABaseRetroWeapon::FireWeapon(int AmountOfAmmoNeeded)
 	FHitResult Hit;
 	FCollisionQueryParams CollisionParams; // define the collision
 	CollisionParams.AddIgnoredActor(GetWorld()->GetFirstPlayerController()->GetPawn());
+	TSubclassOf<UDamageType> WeaponAttack;
 	
 	GetWorld()->LineTraceSingleByChannel(Hit, Start , End, ECC_Visibility,CollisionParams);
 	DrawDebugLine(GetWorld(), Start, End, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
-
+	
+	if (Hit.bBlockingHit)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
+		UGameplayStatics::ApplyDamage(Hit.GetActor(), WeaponDamage, GetWorld()->GetFirstPlayerController(), this, WeaponAttack);
+	}
+	
 	DecrementAmmo(AmountOfAmmoNeeded);
 }
 
