@@ -62,4 +62,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ammo)
 	int MaxCell = 300;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float Health = 50;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float Shield = 15;
+	
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
+	void UpdatePlayerHealthAndShield(float Damage);
 };

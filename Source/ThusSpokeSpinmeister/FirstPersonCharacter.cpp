@@ -32,4 +32,27 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
+void AFirstPersonCharacter::UpdatePlayerHealthAndShield(float Damage)
+{
+	if (Shield > 0 && Shield >= Damage)
+	{
+		Shield -= Damage;
+	}
+	else if (Shield > 0 && Shield < Damage)
+	{
+		Damage -= Shield;
+		Shield = 0;
+		Health -= Damage;
+	}
+	else
+	{
+		Health -= Damage;
+	}
+
+	if (Health <= 0)
+	{
+		
+	}
+}
+
 
