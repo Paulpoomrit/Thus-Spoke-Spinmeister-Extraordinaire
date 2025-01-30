@@ -57,9 +57,6 @@ void ABaseRetroWeapon::FireWeapon(int AmountOfAmmoNeeded)
 			GetWorld()->SpawnActor<ABlood>(Blood, Hit.Location, Hit.GetActor()->GetActorRotation() + FRotator(0, 90, 0));
 		}
 	}
-	
-	
-	
 }
 
 bool ABaseRetroWeapon::HasEnoughAmmo()
