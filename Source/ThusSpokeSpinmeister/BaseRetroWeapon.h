@@ -61,4 +61,10 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category="Gameplay")
 	void FireProjectile();
+
+	UFUNCTION(BlueprintCallable, Category="Sound")
+	void PlayFireSound();
+private:
+	UPROPERTY(EditAnywhere, Category="Sound")
+	USoundBase* WeaponSound;
 };

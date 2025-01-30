@@ -47,6 +47,11 @@ void ABaseRetroWeapon::FireWeapon(int AmountOfAmmoNeeded)
 	DrawDebugSphere(GetWorld(), End, 10, 10, Hit.bBlockingHit ? FColor::Red : FColor::Blue, true);
 	DecrementAmmo(AmountOfAmmoNeeded);
 	
+	if (!this->ActorHasTag("BFG"))
+	{
+		PlayFireSound();
+	}
+	
 	if (Hit.bBlockingHit)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
@@ -119,5 +124,10 @@ void ABaseRetroWeapon::FireProjectile()
 		ProjectileRef->SetProjectileDamage(this->WeaponDamage);
 		ProjectileRef->FinishSpawning(GetTransform());
 	}
+}
+
+void ABaseRetroWeapon::PlayFireSound()
+{
+	UGameplayStatics::PlaySound2D(GetWorld(), WeaponSound);
 }
 
