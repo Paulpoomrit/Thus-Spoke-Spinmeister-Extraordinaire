@@ -3,3 +3,9 @@
 
 #include "BossBaby.h"
 
+
+ABossBaby::ABossBaby()
+{
+	this->BabyHealth = 250;
+	this->MaxMeleeAttackDistance = 500;
+}

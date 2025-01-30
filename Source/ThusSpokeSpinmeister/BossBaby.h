@@ -13,5 +13,9 @@ UCLASS()
 class THUSSPOKESPINMEISTER_API ABossBaby : public ABaby
 {
 	GENERATED_BODY()
+private:
+public:
+	ABossBaby();
+	
 	
 };
