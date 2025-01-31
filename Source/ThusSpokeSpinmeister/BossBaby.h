@@ -16,6 +16,7 @@ class THUSSPOKESPINMEISTER_API ABossBaby : public ABaby
 private:
 
 	const float OriginalMaxHealth = 250.0f;
+	float NextHealthThresholdForSpawning = OriginalMaxHealth;
 	
 public:
 

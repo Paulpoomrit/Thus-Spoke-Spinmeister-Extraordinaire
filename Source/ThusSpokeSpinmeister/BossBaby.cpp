@@ -11,28 +11,35 @@ void ABossBaby::BeginPlay()
 	Super::BeginPlay();
 	this->BabyHealth = OriginalMaxHealth;
 	this->MaxMeleeAttackDistance = 500;
-	SpawnBabies(1,5,5);
+	SpawnBabies(5,5,5);
 }
 
 void ABossBaby::SpawnBabies(int NumBabies, float NewBabyHealth, float NewBabyDamage)
 {
-	ABaby* BabyMinionRef = GetWorld()->SpawnActorDeferred<ABaby>(BabyClass, FTransform(FRotator(0, 0, 0)));
-	if (BabyMinionRef)
+	for (int i = 0; i < NumBabies; i++)
 	{
-		FTransform SpawnTransform = GetRandomizedBabyTransform(NumBabies);
-		BabyMinionRef->BabyDamage = NewBabyDamage;
-		BabyMinionRef->BabyHealth = NewBabyHealth;
-		BabyMinionRef->SpawnDefaultController();
-		BabyMinionRef->FinishSpawning(SpawnTransform);
-	}
+		ABaby* BabyMinionRef = GetWorld()->SpawnActorDeferred<ABaby>(BabyClass, FTransform(FRotator(0, 0, 0)));
+		if (BabyMinionRef)
+		{
+			FTransform SpawnTransform = GetRandomizedBabyTransform(i);
+			BabyMinionRef->BabyDamage = NewBabyDamage;
+			BabyMinionRef->BabyHealth = NewBabyHealth;
+			BabyMinionRef->SpawnDefaultController();
+			BabyMinionRef->FinishSpawning(SpawnTransform);
+		}
+	} 
 }
+
+int NextHealthThresholdForSpawning;
 
 bool ABossBaby::BeingDamaged(float DamageAmount)
 {
 	Super::BeingDamaged(DamageAmount);
-	if (BabyHealth == OriginalMaxHealth-50)
+	
+	if (BabyHealth <= NextHealthThresholdForSpawning-50)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Spawn Baby!"));
+		SpawnBabies(5,5,5);
+		NextHealthThresholdForSpawning -= 50;
 	}
 	return true;
 }
@@ -44,6 +51,7 @@ float ABossBaby::GetHealthPercentage() const
 
 FTransform ABossBaby::GetRandomizedBabyTransform(int seed) const
 {
+	// location here is level-specific
 	FTransform SpawnTransform = FTransform(FRotator(0, 0, 0),
 			UE::Math::TVector<double>(-19014,-239170,-31601),
 			UE::Math::TVector<double>(1,1,1));

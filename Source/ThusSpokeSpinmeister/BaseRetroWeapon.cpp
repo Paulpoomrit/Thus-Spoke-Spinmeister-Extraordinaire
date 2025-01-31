@@ -106,12 +106,16 @@ void ABaseRetroWeapon::DecrementAmmo(int AmountOfAmmoNeeded)
 	{
 		case EAmmoType::Bullet:
 			Player->CurrentBullet-= AmountOfAmmoNeeded;
+			break;
 		case EAmmoType::Shell:
 			Player->CurrentShell-= AmountOfAmmoNeeded;
+			break;	
 		case EAmmoType::Rocket:
 			Player->CurrentRocket-= AmountOfAmmoNeeded;
+			break;
 		case EAmmoType::Cell:
 			Player->CurrentCell-= AmountOfAmmoNeeded;
+			break;
 	}
 }
 
