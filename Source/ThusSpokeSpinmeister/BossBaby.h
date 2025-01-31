@@ -14,8 +14,23 @@ class THUSSPOKESPINMEISTER_API ABossBaby : public ABaby
 {
 	GENERATED_BODY()
 private:
+
+	const float OriginalMaxHealth = 250.0f;
+	
 public:
-	ABossBaby();
-	
-	
+
+	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnBabies(int NumBabies, float NewBabyHealth, float NewBabyDamage);
+
+	virtual bool BeingDamaged(float DamageAmount) override;
+
+	UFUNCTION(BlueprintCallable)
+	float GetHealthPercentage() const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class ABaby> BabyClass;
+
+	FTransform GetRandomizedBabyTransform(int seed) const;
 };

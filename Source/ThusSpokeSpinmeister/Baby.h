@@ -19,8 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	float BabyHealth = 1;
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool IsDead = false;
@@ -37,10 +36,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Gameplay")
 	float BabyDamage = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float BabyHealth = 1.0f;
 	
 	UFUNCTION(BlueprintCallable)
     void MeleeAttack();
 
 	UFUNCTION(BlueprintCallable)
-	bool BeingDamaged(float Damage);
+	virtual bool BeingDamaged(float Damage);
 };
