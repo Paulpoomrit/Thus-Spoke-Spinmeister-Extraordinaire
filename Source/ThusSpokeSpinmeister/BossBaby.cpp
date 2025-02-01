@@ -2,7 +2,6 @@
 
 
 #include "BossBaby.h"
-
 #include "Kismet/GameplayStatics.h"
 #include "Math/TransformCalculus3D.h"
 
@@ -11,7 +10,9 @@ void ABossBaby::BeginPlay()
 	Super::BeginPlay();
 	this->BabyHealth = OriginalMaxHealth;
 	this->MaxMeleeAttackDistance = 500;
-	SpawnBabies(5,5,5);
+	SpawnBabies(5,1,5);
+	
+	CurrentPlayerState = Cast<APlayerStateBase>(UGameplayStatics::GetPlayerState(this, 0));
 }
 
 void ABossBaby::SpawnBabies(int NumBabies, float NewBabyHealth, float NewBabyDamage)
@@ -21,6 +22,7 @@ void ABossBaby::SpawnBabies(int NumBabies, float NewBabyHealth, float NewBabyDam
 		ABaby* BabyMinionRef = GetWorld()->SpawnActorDeferred<ABaby>(BabyClass, FTransform(FRotator(0, 0, 0)));
 		if (BabyMinionRef)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Baby is being spawned"));
 			FTransform SpawnTransform = GetRandomizedBabyTransform(i);
 			BabyMinionRef->BabyDamage = NewBabyDamage;
 			BabyMinionRef->BabyHealth = NewBabyHealth;
