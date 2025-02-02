@@ -10,10 +10,38 @@ void ABossBaby::BeginPlay()
 	Super::BeginPlay();
 	this->BabyHealth = OriginalMaxHealth;
 	this->MaxMeleeAttackDistance = 500;
-	SpawnBabies(5,1,5);
 	
 	CurrentPlayerState = Cast<APlayerStateBase>(UGameplayStatics::GetPlayerState(this, 0));
-	
+	CurrentGameInstance = Cast<USpinmeisterGameInstance>(UGameplayStatics::GetGameInstance(this));
+	if (CurrentGameInstance)
+	{
+		UE_LOG(LogTemp, Error, TEXT("GameInstance is %s"), *CurrentGameInstance->GetName());
+		EGameCurrentState CurrentGameState = CurrentGameInstance->GetCurrentPlayerState();
+		switch (CurrentGameState)
+		{
+		case EGameCurrentState::FPSLevel1:
+			HealthForEachMinion = 2;
+			break;
+		case EGameCurrentState::FPSLevel2:
+			HealthForEachMinion = 3;
+			break;
+		case EGameCurrentState::FPSLevel3:
+			HealthForEachMinion = 4;
+			break;
+		case EGameCurrentState::FPSLevelRepeat:
+			HealthForEachMinion = 5;
+			break;
+		default:
+			HealthForEachMinion = 1;
+			break;
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("GameInstanceNotFound"));
+	}
+	UE_LOG(LogTemp, Error, TEXT("HealthMinions: %f"), HealthForEachMinion);
+	SpawnBabies(5,HealthForEachMinion,5);
 }
 
 void ABossBaby::SpawnBabies(int NumBabies, float NewBabyHealth, float NewBabyDamage)
@@ -41,7 +69,7 @@ bool ABossBaby::BeingDamaged(float DamageAmount)
 	
 	if (BabyHealth <= NextHealthThresholdForSpawning-25)
 	{
-		SpawnBabies(NumberOfMinionsToSpawn,1,CurrentMinionDamage);
+		SpawnBabies(NumberOfMinionsToSpawn,HealthForEachMinion,CurrentMinionDamage);
 		NumberOfMinionsToSpawn+=5;
 		CurrentMinionDamage++;
 		NextHealthThresholdForSpawning -= 25;

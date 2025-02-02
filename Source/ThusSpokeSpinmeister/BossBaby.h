@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SpinmeisterGameInstance.h"
 #include "PlayerStateBase.h"
 #include "Baby.h"
+#include "Kismet/GameplayStatics.h"
 #include "BossBaby.generated.h"
 
 /**
@@ -19,8 +21,11 @@ private:
 	const float OriginalMaxHealth = 250.0f;
 	float NextHealthThresholdForSpawning = OriginalMaxHealth;
 	int NumberOfMinionsToSpawn = 5;
+	float HealthForEachMinion = 1;
 	int CurrentMinionDamage = 5;
 	APlayerStateBase* CurrentPlayerState;
+	USpinmeisterGameInstance* CurrentGameInstance;
+	
 	FName LevelToOpen = FName("DEMO_Map");
 
 	

@@ -35,6 +35,7 @@ protected:
 
 private:
 	FName LevelToOpen = FName("DEMO_Map");
+	USpinmeisterGameInstance* CurrentGameInstance;
 
 public:	
 	// Called every frame
