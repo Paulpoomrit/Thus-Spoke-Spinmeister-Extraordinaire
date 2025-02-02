@@ -20,13 +20,14 @@ enum class EGameCurrentState : uint8
 	FPSLevel2 = 4 UMETA(DisplayName = "FPSLevel2"),
 	SpinnerLevel2 = 5 UMETA(DisplayName = "SpinnerLevel2"),
 	FPSLevel3 = 6 UMETA(DisplayName = "FPSLevel3"),
+	FPSLevelRepeat = 7 UMETA(DisplayName = "FPSLevelRepeat"),
 };
 
 UCLASS()
 class THUSSPOKESPINMEISTER_API USpinmeisterGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	EGameCurrentState CurrentPlayerState = EGameCurrentState::FPSIntro;
+	EGameCurrentState CurrentPlayerState = EGameCurrentState::SpinnerLevel2;
 	int NumBabiesKilled = 0;
 	bool FirstPersonPlayerIsDead = false;
 

@@ -32,6 +32,10 @@ void USpinmeisterGameInstance::ProgressPlayerState()
 		case EGameCurrentState::SpinnerLevel2:
 			CurrentPlayerState = EGameCurrentState::FPSLevel3;
 			break;
+
+		case EGameCurrentState::FPSLevel3:
+			CurrentPlayerState = EGameCurrentState::FPSLevelRepeat;
+			break;
 		
 	}
 	

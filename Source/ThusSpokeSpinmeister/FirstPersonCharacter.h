@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SpinmeisterGameInstance.h"
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
