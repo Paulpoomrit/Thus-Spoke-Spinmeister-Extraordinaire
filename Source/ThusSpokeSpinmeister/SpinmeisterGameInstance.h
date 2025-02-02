@@ -27,7 +27,7 @@ UCLASS()
 class THUSSPOKESPINMEISTER_API USpinmeisterGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	EGameCurrentState CurrentPlayerState = EGameCurrentState::FPSLevelRepeat;
+	EGameCurrentState CurrentPlayerState = EGameCurrentState::SpinnerLevel2;
 	int NumBabiesKilled = 0;
 	bool FirstPersonPlayerIsDead = false;
 
