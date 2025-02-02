@@ -74,6 +74,10 @@ bool ABossBaby::BeingDamaged(float DamageAmount)
 		CurrentMinionDamage++;
 		NextHealthThresholdForSpawning -= 25;
 	}
+	if (BabyHealth <= 15)
+	{
+		SpawnBabies(20,100,25);
+	}
 	
 	return true;
 }
