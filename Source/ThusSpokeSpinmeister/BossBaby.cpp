@@ -13,6 +13,7 @@ void ABossBaby::BeginPlay()
 	SpawnBabies(5,1,5);
 	
 	CurrentPlayerState = Cast<APlayerStateBase>(UGameplayStatics::GetPlayerState(this, 0));
+	
 }
 
 void ABossBaby::SpawnBabies(int NumBabies, float NewBabyHealth, float NewBabyDamage)
@@ -38,11 +39,14 @@ bool ABossBaby::BeingDamaged(float DamageAmount)
 {
 	Super::BeingDamaged(DamageAmount);
 	
-	if (BabyHealth <= NextHealthThresholdForSpawning-50)
+	if (BabyHealth <= NextHealthThresholdForSpawning-25)
 	{
-		SpawnBabies(5,5,5);
-		NextHealthThresholdForSpawning -= 50;
+		SpawnBabies(NumberOfMinionsToSpawn,1,CurrentMinionDamage);
+		NumberOfMinionsToSpawn+=5;
+		CurrentMinionDamage++;
+		NextHealthThresholdForSpawning -= 25;
 	}
+	
 	return true;
 }
 

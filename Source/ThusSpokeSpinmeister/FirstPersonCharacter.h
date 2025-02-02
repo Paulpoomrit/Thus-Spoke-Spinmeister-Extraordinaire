@@ -32,6 +32,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	FName LevelToOpen = FName("DEMO_Map");
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -71,4 +74,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = Gameplay)
 	void UpdatePlayerHealthAndShield(float Damage);
+
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
+	bool HasLowHealth() const;
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
+	bool IsDead() const;
 };

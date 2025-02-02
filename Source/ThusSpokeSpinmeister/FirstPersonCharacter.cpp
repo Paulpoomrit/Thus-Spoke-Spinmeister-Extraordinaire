@@ -3,6 +3,8 @@
 
 #include "FirstPersonCharacter.h"
 
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -48,11 +50,16 @@ void AFirstPersonCharacter::UpdatePlayerHealthAndShield(float Damage)
 	{
 		Health -= Damage;
 	}
+}
 
-	if (Health <= 0)
-	{
-		
-	}
+bool AFirstPersonCharacter::HasLowHealth() const
+{
+	return Health <= 20;
+}
+
+bool AFirstPersonCharacter::IsDead() const
+{
+	return Health <= 0;
 }
 
 

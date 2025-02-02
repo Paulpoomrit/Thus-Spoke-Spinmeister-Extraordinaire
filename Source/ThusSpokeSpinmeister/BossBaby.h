@@ -21,6 +21,8 @@ private:
 	int NumberOfMinionsToSpawn = 5;
 	int CurrentMinionDamage = 5;
 	APlayerStateBase* CurrentPlayerState;
+	FName LevelToOpen = FName("DEMO_Map");
+
 	
 public:
 

@@ -13,7 +13,6 @@
 UENUM(BlueprintType)
 enum class EGameCurrentState : uint8
 {
-	None,
 	FPSIntro = 0 UMETA(DisplayName = "FPSIntro"),
 	SpinnerIntro = 1 UMETA(DisplayName = "SpinnerIntro"),
 	FPSLevel1 = 2 UMETA(DisplayName = "FPSLevel1"),
@@ -21,22 +20,34 @@ enum class EGameCurrentState : uint8
 	FPSLevel2 = 4 UMETA(DisplayName = "FPSLevel2"),
 	SpinnerLevel2 = 5 UMETA(DisplayName = "SpinnerLevel2"),
 	FPSLevel3 = 6 UMETA(DisplayName = "FPSLevel3"),
-	SpinnerLevel3 = 7 UMETA(DisplayName = "SpinnerLevel3"),
 };
 
 UCLASS()
 class THUSSPOKESPINMEISTER_API USpinmeisterGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	EGameCurrentState CurrentPlayerState = EGameCurrentState::None;
+	EGameCurrentState CurrentPlayerState = EGameCurrentState::FPSIntro;
 	int NumBabiesKilled = 0;
+	bool FirstPersonPlayerIsDead = false;
 
 public:
-	[[nodiscard]] int NumBabiesKilled1() const
+	[[nodiscard]] bool GetFirstPersonPlayerIsDead() const
+	{
+		return FirstPersonPlayerIsDead;
+	}
+
+	void SetFirstPersonPlayerIsDead(const bool bFirstPersonPlayerIsDead)
+	{
+		FirstPersonPlayerIsDead = bFirstPersonPlayerIsDead;
+	}
+
+	UFUNCTION(BlueprintCallable, Category = "Stat")
+	[[nodiscard]] int GetNumBabiesKilled() const
 	{
 		return NumBabiesKilled;
 	}
 
+	UFUNCTION(BlueprintCallable, Category = "Stat")
 	void IncrementNumBabiesKilled(const int NumBabiesKilled)
 	{
 		this->NumBabiesKilled++;
@@ -53,5 +64,8 @@ public:
 	{
 		this->CurrentPlayerState = CurrentPlayerState;
 	}
+
+	UFUNCTION(BlueprintCallable, Category = "PlayerState")
+	void ProgressPlayerState();
 	
 };
